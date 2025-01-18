@@ -1,15 +1,28 @@
 // src/services/transactionService.js
 const neo4j = require('../config/neo4j');
 
-const getTransactions = async (input) => {
-  const session = neo4j.getSession();  // Utilisation de la méthode getSession()
+const getTransactionById = async (input) => {
+  const session = neo4j.getSession();
   try {
     const result = await session.run(
-      `MATCH (u:Client {id: $userId})-[:PERFORMED]->(t:Transaction)
+      `MATCH (t:Transaction {id: $transactionId})
        RETURN t`,
-      { userId: input.userId }
+      { transactionId: input.transactionId }
     );
-    return result.records.map(record => record.get('t').properties);
+    if (result.records.length > 0) {
+      const transaction = result.records[0].get('t');
+      return {
+        id: transaction.properties.id,
+        amount: transaction.properties.amount,
+        fraud: transaction.properties.fraud,
+        step: transaction.properties.step,
+        globalStep: transaction.properties.globalStep,
+        ts: transaction.properties.ts,
+        labels: transaction.labels
+      };
+    } else {
+      return null; // Si aucune transaction n'est trouvée
+    }
   } finally {
     await session.close();
   }
@@ -23,10 +36,21 @@ const getTransactionChain = async (input) => {
        RETURN nextTx`,
       { transactionId: input.transactionId }
     );
-    return result.records.map(record => record.get('nextTx').properties);
+    return result.records.map(record => {
+      const transaction = record.get('nextTx');
+      return {
+        id: transaction.properties.id,
+        amount: transaction.properties.amount,
+        fraud: transaction.properties.fraud,
+        step: transaction.properties.step,
+        globalStep: transaction.properties.globalStep,
+        ts: transaction.properties.ts,
+        labels: transaction.labels
+      };
+    });
   } finally {
     await session.close();
   }
 };
 
-module.exports = { getTransactions, getTransactionChain };
+module.exports = { getTransactionById, getTransactionChain };

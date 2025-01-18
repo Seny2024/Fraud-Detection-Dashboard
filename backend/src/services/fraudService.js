@@ -180,7 +180,10 @@ const detectRapidTransactions = async () => {
   try {
     const result = await session.run(`
       MATCH (t:Transaction)-[:NEXT*]->(next:Transaction)
-      WHERE duration.between(datetime(t.ts), datetime(next.ts)).minutes < 10
+      WHERE duration.between(
+        datetime({epochMillis: t.ts * 1000}),
+        datetime({epochMillis: next.ts * 1000})
+      ).minutes < 10
       WITH t, COUNT(next) AS rapidCount
       WHERE rapidCount > 5
       RETURN t.id AS transactionId, rapidCount
@@ -203,6 +206,7 @@ const createIndexes = async () => {
       CREATE INDEX FOR (t:Transaction) ON (t.id);
       CREATE INDEX FOR (c:Client) ON (c.pageRank);
     `);
+    return true; // Retourne true pour indiquer que les indexes ont été créés avec succès
   } finally {
     await session.close();
   }

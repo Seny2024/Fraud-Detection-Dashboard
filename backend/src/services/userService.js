@@ -38,7 +38,19 @@ const getUserTransactions = async (input) => {
        RETURN t`,
       { userId: input.userId }
     );
-    return result.records.map(record => record.get('t').properties);
+
+    // Ajoutez des logs pour vérifier les données retournées
+    console.log(result.records);
+
+    return result.records.map(record => {
+      const transaction = record.get('t');
+      return {
+        identity: transaction.identity,
+        labels: transaction.labels,
+        properties: transaction.properties,
+        elementId: transaction.elementId
+      };
+    });
   } finally {
     await session.close();
   }

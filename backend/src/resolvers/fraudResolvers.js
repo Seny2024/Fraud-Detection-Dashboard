@@ -21,6 +21,13 @@ const resolvers = {
       return await fraudService.exportGraphData();
     },
   },
+
+  Mutation: {
+    createIndexes: async () => {
+      const result = await fraudService.createIndexes();
+      return result; // Retourne la valeur de la fonction createIndexes
+    }
+  }
 };
 
 module.exports = resolvers;

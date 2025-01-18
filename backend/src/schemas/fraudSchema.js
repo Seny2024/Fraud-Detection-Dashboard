@@ -61,6 +61,10 @@ const typeDefs = gql`
     exportGraphData: GraphData
   }
 
+  type Mutation {
+    createIndexes: Boolean
+  }
+
   input FraudInput {
     transactionId: ID!
   }

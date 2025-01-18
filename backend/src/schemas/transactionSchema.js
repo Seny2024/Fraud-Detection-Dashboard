@@ -12,14 +12,12 @@ const typeDefs = gql`
     labels: [String]!
   }
 
-
   type Query {
-    getTransactions(input: TransactionInput!): [Transaction]
     getTransactionChain(input: TransactionInput!): [Transaction]
+    getTransactionById(input: TransactionInput!): Transaction
   }
 
   input TransactionInput {
-    userId: ID!
     transactionId: ID
   }
 `;

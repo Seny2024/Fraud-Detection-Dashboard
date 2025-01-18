@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "exec": "node --max-old-space-size=4096 src/index.js"
+    "start": "node src/App_backend.js",
+    "dev": "nodemon src/App_backend.js",
+    "exec": "node --max-old-space-size=4096 src/App_backend.js"
   },
   "keywords": [],
   "author": "",

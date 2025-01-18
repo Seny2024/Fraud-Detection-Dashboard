@@ -9,6 +9,22 @@ const typeDefs = gql`
     ssn: String
   }
 
+  type Transaction {
+    identity: ID!
+    labels: [String!]!
+    properties: TransactionProperties!
+    elementId: String!
+  }
+
+  type TransactionProperties {
+    globalStep: Int!
+    amount: Float!
+    fraud: Boolean!
+    step: Int!
+    id: String!
+    ts: Int!
+  }
+
   type Query {
     getUser(input: UserInput!): User
     getUserTransactions(input: UserInput!): [Transaction]
