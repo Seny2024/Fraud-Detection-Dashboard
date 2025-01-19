@@ -33,7 +33,9 @@ const getVisualizationData = async () => {
   
         // Détection des clients avec des transactions à haute valeur
         MATCH (c:Client)-[r]->(t:Transaction)
-        WHERE t.amount > 10000
+        WITH avg(t.amount) AS avgAmount
+        MATCH (c:Client)-[r2]->(t:Transaction) // Correct match for c after aggregation
+        WHERE t.amount > 10 * avgAmount
         RETURN 
           c.id AS clientId, 
           c.name AS clientName, 

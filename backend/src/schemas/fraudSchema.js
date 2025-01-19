@@ -43,7 +43,7 @@ const typeDefs = gql`
   type GraphNode {
     id: ID!
     labels: [String]
-    properties: String
+    properties: String!
   }
 
   type GraphEdge {

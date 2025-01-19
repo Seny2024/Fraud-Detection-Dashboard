@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../../assets/styles/Sidebar.css';
+import '../../assets/styles/Sidebar.css'; 
 
 const Sidebar = () => {
     return (
@@ -16,9 +16,14 @@ const Sidebar = () => {
                 <NavLink to="/fraud-detection" className="sidebar-link" activeClassName="active">
                     Détection de Fraude
                 </NavLink>
-                <NavLink to="/settings" className="sidebar-link" activeClassName="active">
-                    Paramètres
+                <NavLink to="/VisualizationData" className="sidebar-link" activeClassName="active">
+                   Visualization Data Page
                 </NavLink>
+
+                <NavLink to="/GraphData" className="sidebar-link" activeClassName="active">
+                    Graphe de transactions 
+                </NavLink>
+
                 <NavLink to="/help" className="sidebar-link" activeClassName="active">
                     Aide
                 </NavLink>

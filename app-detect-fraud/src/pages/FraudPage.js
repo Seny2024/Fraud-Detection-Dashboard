@@ -1,4 +1,4 @@
-// FraudPage.js
+// src/components/FraudPage.js
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
@@ -6,7 +6,6 @@ import {
   GET_SUSPICIOUS_ENTITIES,
   GET_HIGH_RISK_COMMUNITIES,
   GET_ANOMALOUS_TRANSACTIONS,
-  EXPORT_GRAPH_DATA,
   GET_RAPID_TRANSACTIONS,
   CREATE_INDEXES
 } from '../services_graphql/queriesFraudDetection';
@@ -37,10 +36,6 @@ const FraudPage = () => {
     skip: option !== 'detectAnomalousTransactions'
   });
 
-  const { data: graphData, error: graphDataError, refetch: refetchGraphData } = useQuery(EXPORT_GRAPH_DATA, {
-    skip: option !== 'exportGraphData'
-  });
-
   const { data: rapidTransactionsData, error: rapidTransactionsError, refetch: refetchRapidTransactions } = useQuery(GET_RAPID_TRANSACTIONS, {
     skip: option !== 'detectRapidTransactions'
   });
@@ -48,8 +43,8 @@ const FraudPage = () => {
   const [createIndexes] = useMutation(CREATE_INDEXES);
 
   useEffect(() => {
-    if (fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || graphDataError || rapidTransactionsError) {
-      console.error('Error fetching data:', fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || graphDataError || rapidTransactionsError);
+    if (fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || rapidTransactionsError) {
+      console.error('Error fetching data:', fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || rapidTransactionsError);
       setError('Error fetching data');
       setLoading(false);
     } else if (fraudData && option === 'detectFraud') {
@@ -64,14 +59,11 @@ const FraudPage = () => {
     } else if (anomalousTransactionsData && option === 'detectAnomalousTransactions') {
       setData(anomalousTransactionsData.detectAnomalousTransactions);
       setLoading(false);
-    } else if (graphData && option === 'exportGraphData') {
-      setData(graphData.exportGraphData);
-      setLoading(false);
     } else if (rapidTransactionsData && option === 'detectRapidTransactions') {
       setData(rapidTransactionsData.detectRapidTransactions);
       setLoading(false);
     }
-  }, [fraudData, suspiciousEntitiesData, highRiskCommunitiesData, anomalousTransactionsData, graphData, rapidTransactionsData, fraudError, suspiciousEntitiesError, highRiskCommunitiesError, anomalousTransactionsError, graphDataError, rapidTransactionsError, option]);
+  }, [fraudData, suspiciousEntitiesData, highRiskCommunitiesData, anomalousTransactionsData, rapidTransactionsData, fraudError, suspiciousEntitiesError, highRiskCommunitiesError, anomalousTransactionsError, rapidTransactionsError, option]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,8 +79,6 @@ const FraudPage = () => {
         await refetchHighRiskCommunities();
       } else if (option === 'detectAnomalousTransactions') {
         await refetchAnomalousTransactions();
-      } else if (option === 'exportGraphData') {
-        await refetchGraphData();
       } else if (option === 'detectRapidTransactions') {
         await refetchRapidTransactions();
       } else if (option === 'createIndexes') {
@@ -123,7 +113,6 @@ const FraudPage = () => {
           <option value="detectSuspiciousEntities">Detect Suspicious Entities</option>
           <option value="detectHighRiskCommunities">Detect High Risk Communities</option>
           <option value="detectAnomalousTransactions">Detect Anomalous Transactions</option>
-          <option value="exportGraphData">Export Graph Data</option>
           <option value="detectRapidTransactions">Detect Rapid Transactions</option>
           <option value="createIndexes">Create Indexes</option>
         </select>

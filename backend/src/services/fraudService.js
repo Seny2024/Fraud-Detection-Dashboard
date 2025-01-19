@@ -143,25 +143,26 @@ const detectAnomalousTransactions = async () => {
   }
 };
 
-// Fonction d'export des données du graphe
+
+
 const exportGraphData = async () => {
   const session = getSession();
   try {
     const nodes = await session.run(`
       MATCH (n)
-      RETURN n.id AS id, labels(n) AS labels, properties(n) AS properties
+      RETURN n.id AS id, labels(n) AS labels, properties(n) AS properties limit 200
     `);
 
     const edges = await session.run(`
       MATCH (n)-[r]->(m)
-      RETURN n.id AS source, m.id AS target, type(r) AS relationship
+      RETURN n.id AS source, m.id AS target, type(r) AS relationship limit 200
     `);
 
     return {
       nodes: nodes.records.map(record => ({
         id: record.get('id'),
         labels: record.get('labels'),
-        properties: record.get('properties'),
+        properties: JSON.stringify(record.get('properties')), // Convertir les propriétés en chaîne JSON
       })),
       edges: edges.records.map(record => ({
         source: record.get('source'),
@@ -173,6 +174,9 @@ const exportGraphData = async () => {
     await session.close();
   }
 };
+
+
+
 
 // Fonction de détection des transactions rapides
 const detectRapidTransactions = async () => {
