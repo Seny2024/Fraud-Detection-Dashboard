@@ -220,7 +220,7 @@ const FraudPage = () => {
 
   return (
     <div>
-      <h1>Détection de Fraude</h1>
+      <h1 className="title">Détection de Fraude</h1>
       <form onSubmit={handleSubmit}>
         {option === 'detectFraud' && (
           <input

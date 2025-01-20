@@ -60,3 +60,9 @@
     background-color: #fbe9e7;
   }
   
+  .title {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+  }

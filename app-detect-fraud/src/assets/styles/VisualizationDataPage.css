@@ -25,11 +25,6 @@
     }
   }
 
-
-
-
-  /* src/assets/styles/VisualizationDataPage.css */
-
 /* Container for the entire page */
 .visualization-data-container {
     font-family: Arial, sans-serif;
@@ -37,16 +32,16 @@
   
   /* Title */
   .visualization-data-container h1 {
-    font-size: 35px;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #4CAF50;
     text-align: center;
+    margin-bottom: 10px;
   }
   
   /* Section containing the table */
   .visualization-data-section {
     overflow-x: auto;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   /* Table styling */

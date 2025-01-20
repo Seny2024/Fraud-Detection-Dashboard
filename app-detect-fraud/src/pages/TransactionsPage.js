@@ -90,6 +90,7 @@ const TransactionsPage = () => {
 
   return (
     <div>
+      <h1 className="titleGestion">Gestion des Clients et des Transactions</h1>
       <form onSubmit={handleSubmit}>
         {option === 'getUser' || option === 'getUserTransactions' ? (
           <input

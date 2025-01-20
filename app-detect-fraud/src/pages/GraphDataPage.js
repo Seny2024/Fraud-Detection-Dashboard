@@ -141,7 +141,7 @@ const GraphDataPage = () => {
 
   return (
     <div className="graph-data-container">
-      <h1>Graph Data Visualization</h1>
+      <h1>Graphe des Transactions limité à 200</h1>
       <div id="cy" style={{ width: '100%', height: '500px' }}></div>
     </div>
   );

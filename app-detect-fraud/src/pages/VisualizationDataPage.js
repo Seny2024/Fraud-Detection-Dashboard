@@ -17,7 +17,7 @@ const VisualizationDataPage = () => {
 
   return (
     <div className="visualization-data-container">
-      <h1>Resumé des transactions supérieures à 10 fois la moyenne par personne</h1>
+      <h1>Transactions supérieures à 10 fois la moyenne par personne</h1>
       <div className="visualization-data-section">
         {/* Tableau des résultats */}
         <table>
