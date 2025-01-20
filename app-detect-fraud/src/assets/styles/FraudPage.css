@@ -1,0 +1,62 @@
+/* src/assets/styles/Home.css */
+
+/* Styling for the loading spinner */
+.loading {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: flex-start; /* Aligne le spinner en haut */
+    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+    margin-top: 10%;
+  }
+  
+  .loading-spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #4CAF50;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #4CAF50; /* Changement de couleur d'arrière-plan pour les en-têtes */
+    color: white; /* Texte blanc pour un meilleur contraste */
+    border-radius: 2px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Table specific styles for fraud and suspicious entities */
+  .fraud-table {
+    background-color: #eaf7e4;
+  }
+  
+  .suspicious-entities-table {
+    background-color: #fbe9e7;
+  }
+  

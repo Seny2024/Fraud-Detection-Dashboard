@@ -6,6 +6,7 @@ const resolvers = {
     getTransactionChain: async (_, { input }) => {
       return getTransactionChain(input);
     },
+    
     getTransactionById: async (_, { input }) => {
       return getTransactionById(input);
     }

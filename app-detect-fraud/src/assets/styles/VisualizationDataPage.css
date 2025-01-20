@@ -1,0 +1,127 @@
+/* src/assets/styles/Home.css */
+.loading {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: flex-start; /* Aligne le spinner en haut */
+    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+    margin-top: 10%;
+  }
+  
+  .loading-spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #4CAF50;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+
+  /* src/assets/styles/VisualizationDataPage.css */
+
+/* Container for the entire page */
+.visualization-data-container {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title */
+  .visualization-data-container h1 {
+    font-size: 35px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Section containing the table */
+  .visualization-data-section {
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+  
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Table header styling */
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 18px;
+  }
+  
+  th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border-radius: 2px;
+  }
+  
+  td {
+    color: #333;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  /* Hover effect on table rows */
+  tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Formatting for number columns (with two decimal places) */
+  td {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  td:last-child {
+    font-weight: bold;
+  }
+  
+  /* Loading spinner */
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .visualization-data-section .loading {
+    margin-top: 20px;
+  }
+  
+  /* Adding some spacing around the page */
+  .visualization-data-section {
+    margin-top: 30px;
+  }
+  
+  /* Specific styling for fraud flags if any */
+  .fraud-flags {
+    color: #ff0000;
+    font-weight: bold;
+  }
+  
+  

@@ -10,3 +10,30 @@ body {
     flex-direction: column;
     min-height: 100vh;
   }
+
+/* src/assets/styles/Home.css */
+.loading {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: flex-start; /* Aligne le spinner en haut */
+  height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+  margin-top: 10%;
+}
+
+.loading-spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #4CAF50;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

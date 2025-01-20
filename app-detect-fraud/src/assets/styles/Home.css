@@ -1,9 +1,183 @@
-home-container {
-    padding: 20px;
-    text-align: center;
+/* Reset de base */
+body, h1, h2, h3, p, table {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  color: #333;
+}
+
+/* En-tête du tableau de bord */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+  background: linear-gradient(135deg, rgba(32, 2, 2, 0.8), rgba(9, 6, 51, 0.6)); /* Dégradé pour un effet plus dynamique */
+  padding: 30px 20px; /* Plus d'espace pour un effet plus aérien */
+  border-radius: 10px; /* Coins plus arrondis pour un look plus moderne */
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de profondeur */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police plus moderne et lisible */
+}
+
+/* Ajout de l'effet hover */
+.dashboard-header:hover {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)); /* Inversion des couleurs au survol */
+  cursor: pointer; /* Change le curseur pour indiquer l'interaction */
+}
+
+/* Réduction de la taille de l'en-tête sur mobile */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 20px 15px; /* Réduction de l'espace intérieur */
   }
-  
-  .home-container h1 {
-    font-size: 2rem;
-    color: #333;
+}
+
+.dashboard-header h1 {
+  font-size: 50px; /* Taille du texte augmentée pour une meilleure visibilité */
+  font-weight: bold; /* Texte en gras pour le rendre plus proéminent */
+  margin-bottom: 10px; /* Un petit espace en bas pour séparer du reste du contenu */
+  color: #ffffff; /* Texte en blanc pour contraster avec le fond sombre */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre légère pour ajouter de la profondeur */
+  letter-spacing: 1px; /* Espacement des lettres pour un meilleur effet visuel */
+  text-transform: uppercase; /* Majuscules pour un effet plus impactant */
+}
+
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 35px; /* Réduction de la taille du texte sur les petits écrans */
   }
+}
+
+
+.dashboard-header p {
+  font-size: 25px;
+}
+
+/* Contenu principal */
+.dashboard-content {
+  width: 100%;
+}
+
+/* Section des graphiques */
+.charts-section {
+  margin-bottom: 30px;
+}
+
+.charts-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap; 
+  gap: 15px;
+}
+
+.chart-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chart-item h3 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  color: #555;
+  text-align: center;
+}
+
+/* Sections Résumé et Statistiques */
+.summary-section, .statistics-section {
+  margin-bottom: 30px;
+}
+
+.summary-section h2, .statistics-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+}
+
+.summary-table, .statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.summary-table th, .statistics-table th {
+  text-align: left;
+  background: #4CAF50;
+  color: white;
+  padding: 10px;
+}
+
+.summary-table td, .statistics-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.summary-table tr:nth-child(even), .statistics-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.summary-table tr:hover, .statistics-table tr:hover {
+  background: #f1f1f1;
+}
+
+/* Section responsive */
+@media (max-width: 768px) {
+  .charts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-item {
+    width: 90%;
+  }
+
+  .summary-table, .statistics-table {
+    font-size: 0.9em;
+  }
+}
+
+/* src/assets/styles/Home.css */
+.loading {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: flex-start; /* Aligne le spinner en haut */
+  height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+  margin-top: 10%;
+
+}
+
+.loading-spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #4CAF50;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

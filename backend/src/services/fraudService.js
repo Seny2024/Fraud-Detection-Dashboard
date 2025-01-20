@@ -128,8 +128,7 @@ const detectAnomalousTransactions = async () => {
         WITH avg(t.amount) AS avgAmount
         MATCH (t:Transaction)
         WHERE t.amount > avgAmount
-        RETURN t.id AS transactionId, t.amount AS amount, avgAmount
-        LIMIT 10;
+        RETURN t.id AS transactionId, t.amount AS amount, avgAmount LIMIT 1000;
 
     `);
 
@@ -189,7 +188,7 @@ const detectRapidTransactions = async () => {
         datetime({epochMillis: next.ts * 1000})
       ).minutes < 10
       WITH t, COUNT(next) AS rapidCount
-      WHERE rapidCount > 5
+      WHERE rapidCount > 100
       RETURN t.id AS transactionId, rapidCount
     `);
 

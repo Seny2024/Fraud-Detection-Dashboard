@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import cytoscape from 'cytoscape';
 import { EXPORT_GRAPH_DATA } from '../services_graphql/queriesFraudDetection';
 import '../assets/styles/GraphDataPage.css';
+import { RingLoader } from 'react-spinners';
 
 // Fonction de validation et de transformation des données
 const loadGraphData = (data) => {
@@ -130,7 +131,12 @@ const GraphDataPage = () => {
     }
   }, [data, nodeColors, nodeLabels]);
   
-  if (loading) return <p>Loading...</p>;
+  if (loading) return (
+    <div className="loading">
+      <RingLoader color="#4CAF50" size={300} />
+    </div>);
+
+
   if (error) return <p>Error: {error.message}</p>;
 
   return (

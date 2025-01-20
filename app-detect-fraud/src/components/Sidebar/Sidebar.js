@@ -5,7 +5,7 @@ import '../../assets/styles/Sidebar.css';
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <h2 className="sidebar-title">Dashboard</h2>
+            <h2 className="sidebar-title">SYSTEME DETECTION FRAUDE</h2>
             <nav className="sidebar-nav">
                 <NavLink to="/" className="sidebar-link" activeClassName="active" exact>
                     Accueil
@@ -17,15 +17,15 @@ const Sidebar = () => {
                     Détection de Fraude
                 </NavLink>
                 <NavLink to="/VisualizationData" className="sidebar-link" activeClassName="active">
-                   Visualization Data Page
+                   Transactions Suspectes
                 </NavLink>
 
                 <NavLink to="/GraphData" className="sidebar-link" activeClassName="active">
-                    Graphe de transactions 
+                    Graphe des Transactions 
                 </NavLink>
 
                 <NavLink to="/help" className="sidebar-link" activeClassName="active">
-                    Aide
+                    Aide et Manuel
                 </NavLink>
             </nav>
         </div>

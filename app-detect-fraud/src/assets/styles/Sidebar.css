@@ -1,9 +1,10 @@
+/* Sidebar styling */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 250px;
+    width: 255px;
     background-color: #2c3e50;
     color: #ecf0f1;
     display: flex;
@@ -12,35 +13,73 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Title styling */
 .sidebar-title {
     font-size: 45px;
     margin-bottom: 20px;
-    margin-left: 10px;
-    margin-top: 0px;
     text-align: left;
+    color:rgb(203, 236, 82);
 }
 
+/* Navigation links container */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
+    margin-right: 8px;
 }
 
+/* Sidebar link styling (inactive) */
 .sidebar-link {
     text-decoration: none;
     color: #ecf0f1;
-    font-size: 1.1rem;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-size: 23px;
+    width: 90%;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background-color: #34495e; /* Légèrement plus sombre pour les liens non cliqués */
+    transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s ease-in-out;
 }
 
+/* Hover effect for sidebar link */
 .sidebar-link:hover {
-    background-color: #34495e;
+    background-color: #1abc9c; /* Change la couleur au survol */
+    color: white;
+    box-shadow: 0px 4px 6px rgba(26, 188, 156, 0.6); /* Légère ombre au survol */
+    transform: translateX(10px); /* Déplacement légèrement vers la droite pour l'effet de profondeur */
 }
 
+/* Active state for sidebar link */
 .sidebar-link.active {
-    background-color: #1abc9c;
+    background-color: #16a085; /* Couleur différente pour le lien actif */
     color: white;
     font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(26, 188, 156, 0.8); /* Ombre plus marquée pour le lien actif */
+}
+
+/* Adjusted Loading Spinner Position */
+.loading {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+    margin-top: 0;
+}
+
+.loading-spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #4CAF50;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

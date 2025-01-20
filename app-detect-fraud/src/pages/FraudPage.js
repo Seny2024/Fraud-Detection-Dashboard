@@ -1,4 +1,3 @@
-// src/components/FraudPage.js
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
@@ -10,6 +9,7 @@ import {
   CREATE_INDEXES
 } from '../services_graphql/queriesFraudDetection';
 import '../assets/styles/FraudPage.css';
+import { RingLoader } from 'react-spinners';
 
 const FraudPage = () => {
   const [transactionId, setTransactionId] = useState('');
@@ -44,10 +44,11 @@ const FraudPage = () => {
 
   useEffect(() => {
     if (fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || rapidTransactionsError) {
-      console.error('Error fetching data:', fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || rapidTransactionsError);
-      setError('Error fetching data');
+      console.error('Erreur lors de la récupération des données:', fraudError || suspiciousEntitiesError || highRiskCommunitiesError || anomalousTransactionsError || rapidTransactionsError);
+      setError('Erreur lors de la récupération des données');
       setLoading(false);
     } else if (fraudData && option === 'detectFraud') {
+      console.log('Données de fraude:', fraudData);
       setData(fraudData.detectFraud);
       setLoading(false);
     } else if (suspiciousEntitiesData && option === 'detectSuspiciousEntities') {
@@ -86,15 +87,136 @@ const FraudPage = () => {
       }
       setShowResults(true); // Afficher les résultats après la récupération des données
     } catch (err) {
-      console.error('Error refetching data:', err);
-      setError('Error refetching data');
+      console.error('Erreur lors de la récupération des données:', err);
+      setError('Erreur lors de la récupération des données');
     } finally {
       setLoading(false); // Assurez-vous de mettre à jour l'état de chargement
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="loading"><RingLoader color="#4CAF50" size={300} /></div>;
   if (error) return <p>{error}</p>;
+
+  const renderResults = () => {
+    if (!data) {
+      return <p>Aucune donnée disponible</p>;
+    }
+
+    if (option === 'detectFraud' && data) {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID de la Transaction</th>
+              <th>Fraude</th>
+              <th>Étape</th>
+              <th>Étape Globale</th>
+              <th>Horodatage</th>
+              <th>Montant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr key={data.id}>
+              <td>{data.id}</td>
+              <td>{data.fraud ? 'Oui' : 'Non'}</td>
+              <td>{data.step}</td>
+              <td>{data.globalStep}</td>
+              <td>{data.ts}</td>
+              <td>{data.amount}</td>
+            </tr>
+          </tbody>
+        </table>
+      );
+    }
+    if (option === 'detectSuspiciousEntities' && Array.isArray(data)) {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Numéro de téléphone</th>
+              <th>Numéro de sécurité sociale</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.phoneNumber}</td>
+                <td>{item.ssn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+    if (option === 'detectHighRiskCommunities' && Array.isArray(data)) {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID Client</th>
+              <th>ID Communauté</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.clientId}</td>
+                <td>{item.communityId}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+    if (option === 'detectAnomalousTransactions' && Array.isArray(data)) {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID de la Transaction</th>
+              <th>Montant</th>
+              <th>Montant Moyen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.transactionId}</td>
+                <td>{item.amount}</td>
+                <td>{item.avgAmount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+    if (option === 'detectRapidTransactions' && Array.isArray(data)) {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>ID de la Transaction</th>
+              <th>Nombre Rapide</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.transactionId}</td>
+                <td>{item.rapidCount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+  };
 
   return (
     <div>
@@ -105,23 +227,23 @@ const FraudPage = () => {
             type="text"
             value={transactionId}
             onChange={(e) => setTransactionId(e.target.value)}
-            placeholder="Enter Transaction ID"
+            placeholder="Entrez l'ID de la Transaction"
           />
         )}
         <select value={option} onChange={(e) => setOption(e.target.value)}>
-          <option value="detectFraud">Detect Fraud</option>
-          <option value="detectSuspiciousEntities">Detect Suspicious Entities</option>
-          <option value="detectHighRiskCommunities">Detect High Risk Communities</option>
-          <option value="detectAnomalousTransactions">Detect Anomalous Transactions</option>
-          <option value="detectRapidTransactions">Detect Rapid Transactions</option>
-          <option value="createIndexes">Create Indexes</option>
+          <option value="detectFraud">Détecter la Fraude</option>
+          <option value="detectSuspiciousEntities">Détecter les Entités Suspectes</option>
+          <option value="detectHighRiskCommunities">Détecter les Communautés à Haut Risque</option>
+          <option value="detectAnomalousTransactions">Détecter les Transactions Anormales</option>
+          <option value="detectRapidTransactions">Détecter les Transactions Rapides</option>
+          <option value="createIndexes">Créer des Index</option>
         </select>
-        <button type="submit">Execute</button>
+        <button type="submit">Exécuter</button>
       </form>
       {showResults && data && (
         <div>
-          <h2>Results</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          <h2>Résultats</h2>
+          {renderResults()}
         </div>
       )}
     </div>
