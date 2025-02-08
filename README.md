@@ -39,9 +39,6 @@ Ce projet est une interface utilisateur d'aide pour un système de détection de
 ## Contribution
 Les contributions sont les bienvenues ! Forkez le projet et proposez vos améliorations.
 
-## Licence
-Ce projet est sous licence MIT.
-
 ---
 
 Ce système offre une **analyse avancée des comportements frauduleux** à l'aide d'**algorithmes de graphes et de détection d'anomalies**. 🚀
